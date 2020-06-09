@@ -34,7 +34,7 @@ class TodoDetailState extends State {
   Widget build(BuildContext context) {
     titleController.text = todo.title;
     descriptionController.text = todo.description;
-    TextStyle textStyle = Theme.of(context).textTheme.headline;
+    TextStyle textStyle = Theme.of(context).textTheme.headline6;
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
