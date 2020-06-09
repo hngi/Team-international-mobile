@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Todos',
       theme: ThemeData(primarySwatch: Colors.blueGrey),
-      home: MyHomePage(title: 'Todos'),
+      home: MyHomePage(title: 'TODOs'),
     );
   }
 }
@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: null,
+      body: TodoList(),
     );
   }
 }
