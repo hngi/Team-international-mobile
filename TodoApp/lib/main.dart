@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:TodoApp/UI/home.dart';
-
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,8 +10,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Todos',
-      theme: ThemeData(primarySwatch: Colors.blueGrey),
-      home: MyHomePage(),
+      theme:
+      ThemeData(primarySwatch: Colors.blue, accentColor: Colors.blueAccent),
+      home: Home(),
     );
   }
 }
@@ -29,8 +29,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
-      body: TodoList(),
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: null,
     );
   }
 }
