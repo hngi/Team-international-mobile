@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:TodoApp/concept/concept.dart';
 import 'package:TodoApp/db/dbhelper.dart';
+import 'package:TodoApp/UI/createtodo.dart';
 
 class TodoList extends StatefulWidget {
   @override
@@ -21,13 +22,15 @@ class TodoListState extends State {
     return Scaffold(
       body: todoListItems(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          navigateToDetail(Todo('', 3, ''));
+        },
         tooltip: "Add new Todo",
         child: new Icon(Icons.add),
       ),
     );
   }
-  //Listview 
+  //Listview
 
   ListView todoListItems() {
     return ListView.builder(
@@ -41,6 +44,10 @@ class TodoListState extends State {
               backgroundColor: getColor(this.todos[position].rank),
               child: Text(this.todos[position].rank.toString()),
             ),
+            onTap: () {
+              debugPrint("Tapped on " + this.todos[position].id.toString());
+              navigateToDetail(this.todos[position]);
+            },
             title: Text(this.todos[position].title),
             subtitle: Text(this.todos[position].date),
           ),
@@ -64,9 +71,18 @@ class TodoListState extends State {
           todos = todoList;
           count = count;
         });
-        
       });
     });
+  }
+
+  void navigateToDetail(Todo todo) async {
+    bool result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TodoDetail(todo)),
+    );
+    if (result == true) {
+      getData();
+    }
   }
 
   Color getColor(int rank) {
