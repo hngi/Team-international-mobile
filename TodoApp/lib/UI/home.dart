@@ -20,7 +20,27 @@ class TodoListState extends State {
       getData();
     }
     return Scaffold(
-      body: todoListItems(),
+       body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 200.0,
+              floating: false,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text("Hi, This is your todo list"),
+                  background: Image.network(
+                    "https://i.ibb.co/YWmH6Jr/download2.png",
+                    fit: BoxFit.cover,
+                  )),
+            ),
+          ];
+        },
+        body: Center(
+          child: todoListItems(),
+        ),
+       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           navigateToDetail(Todo('', 3, ''));
