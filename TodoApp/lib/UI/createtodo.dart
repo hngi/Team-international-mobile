@@ -77,7 +77,7 @@ class TodoDetailState extends State {
                         style: textStyle,
                         onChanged: (value) => this.updateDescription(),
                         decoration: InputDecoration(
-                            labelText: "Description",
+                            //labelText: "Description",
                             labelStyle: textStyle,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0),
@@ -102,7 +102,7 @@ class TodoDetailState extends State {
                     Container(
                         width: double.infinity,
                         child: RaisedButton(
-                          color: Colors.blueAccent,
+                          color: Colors.pink,
                           onPressed: () {
                             save();
                           },
