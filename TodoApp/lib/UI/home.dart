@@ -27,6 +27,7 @@ class TodoListState extends State {
       ),
     );
   }
+  //Listview 
 
   ListView todoListItems() {
     return ListView.builder(
@@ -74,7 +75,7 @@ class TodoListState extends State {
         return Colors.red;
         break;
       case 2:
-        return Colors.orange;
+        return Colors.blue;
         break;
       case 3:
         return Colors.green;
