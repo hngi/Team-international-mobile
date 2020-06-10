@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:TodoApp/UI/createtodo.dart';
 import 'package:TodoApp/concept/concept.dart';
 import 'package:TodoApp/db/dbhelper.dart';
-import 'package:TodoApp/UI/createtodo.dart';
+import 'package:flutter/material.dart';
 
 class TodoList extends StatefulWidget {
   @override
@@ -12,6 +12,7 @@ class TodoListState extends State {
   DbHelper helper = DbHelper();
   List<Todo> todos;
   int count = 0;
+  double top = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +29,18 @@ class TodoListState extends State {
               expandedHeight: 200.0,
               floating: false,
               pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: Text("Hi, This is your todo list"),
-                  background: Image.asset(
-                    "assets/images/land.jpg",
-                    fit: BoxFit.cover,
-                  )),
+              flexibleSpace: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                // print('constraints=' + constraints.toString());
+                top = constraints.biggest.height;
+                return FlexibleSpaceBar(
+                    //centerTitle: true,
+                    title: _appBarText(top),
+                    background: Image.asset(
+                      "assets/images/land.jpg",
+                      fit: BoxFit.cover,
+                    ));
+              }),
             ),
           ];
         },
@@ -51,8 +57,44 @@ class TodoListState extends State {
       ),
     );
   }
-  //Listview
 
+  //AppBar custom text i.e Title and subtitle
+  Widget _appBarText(double top) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        AnimatedCrossFade(
+          duration: const Duration(milliseconds: 200),
+          firstChild: const Text("Hi",
+              style: TextStyle(
+                fontSize: 28.0,
+              )),
+          secondChild: const Text("Todo",
+              style: TextStyle(
+                fontSize: 28.0,
+              )),
+          crossFadeState:
+          top > 100.0 ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+        ),
+        AnimatedOpacity(
+          duration: Duration(milliseconds: 450),
+          //opacity: top == 80.0 ? 1.0 : 0.0,
+          opacity: top < 100.0 ? 0.0 : 1.0,
+          child: Visibility(
+            visible: top < 100.0 ? false : true,
+            child: Text(
+              "This is your todo list",
+              style: TextStyle(fontSize: 14.0),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  //Listview
   ListView todoListItems() {
     return ListView.builder(
       itemCount: count,
@@ -61,7 +103,7 @@ class TodoListState extends State {
           height: 90,
           child: Card(
             semanticContainer: true,
-             clipBehavior: Clip.antiAliasWithSaveLayer,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
             color: Colors.white,
             elevation: 6.0,
             shape: RoundedRectangleBorder(
