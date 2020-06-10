@@ -20,7 +20,8 @@ class TodoListState extends State {
       getData();
     }
     return Scaffold(
-       body: NestedScrollView(
+      backgroundColor: Color(0xFF2B292A),
+      body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
@@ -30,8 +31,8 @@ class TodoListState extends State {
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   title: Text("Hi, This is your todo list"),
-                  background: Image.network(
-                    "https://i.ibb.co/YWmH6Jr/download2.png",
+                  background: Image.asset(
+                    "assets/images/land.jpg",
                     fit: BoxFit.cover,
                   )),
             ),
@@ -40,7 +41,7 @@ class TodoListState extends State {
         body: Center(
           child: todoListItems(),
         ),
-       ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           navigateToDetail(Todo('', 3, ''));
@@ -56,20 +57,28 @@ class TodoListState extends State {
     return ListView.builder(
       itemCount: count,
       itemBuilder: (BuildContext context, int position) {
-        return Card(
-          color: Colors.white,
-          elevation: 2.0,
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: getColor(this.todos[position].rank),
-              child: Text(this.todos[position].rank.toString()),
+        return Container(
+          height: 90,
+          child: Card(
+            semanticContainer: true,
+             clipBehavior: Clip.antiAliasWithSaveLayer,
+            color: Colors.white,
+            elevation: 6.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
             ),
-            onTap: () {
-              debugPrint("Tapped on " + this.todos[position].id.toString());
-              navigateToDetail(this.todos[position]);
-            },
-            title: Text(this.todos[position].title),
-            subtitle: Text(this.todos[position].date),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: getColor(this.todos[position].rank),
+                child: Text(this.todos[position].rank.toString()),
+              ),
+              onTap: () {
+                debugPrint("Tapped on " + this.todos[position].id.toString());
+                navigateToDetail(this.todos[position]);
+              },
+              title: Text(this.todos[position].title),
+              subtitle: Text(this.todos[position].date),
+            ),
           ),
         );
       },

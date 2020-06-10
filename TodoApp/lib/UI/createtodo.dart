@@ -37,16 +37,20 @@ class TodoDetailState extends State {
     TextStyle textStyle = Theme.of(context).textTheme.headline6;
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          //automaticallyImplyLeading: false,
           title: Text(todo.title),
           actions: <Widget>[
             PopupMenuButton<String>(
               onSelected: select,
+              icon: Icon(Icons.menu),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
               itemBuilder: (BuildContext context) {
                 return choices.map((String choice) {
                   return PopupMenuItem<String>(
                     value: choice,
-                    child: Text(choice),
+                    child: Text(choice,style: TextStyle(fontSize:15.0 ,backgroundColor: Colors.grey[200]),),
                   );
                 }).toList();
               },
@@ -79,6 +83,7 @@ class TodoDetailState extends State {
                         decoration: InputDecoration(
                             //labelText: "Description",
                             labelStyle: textStyle,
+                            hintText: "Description",
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             )),
@@ -102,14 +107,17 @@ class TodoDetailState extends State {
                     Container(
                         width: double.infinity,
                         child: RaisedButton(
-                          color: Colors.pink,
-                          onPressed: () {
-                            save();
-                          },
-                          textColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: const Text('ADD ITEM', style: TextStyle(fontSize: 16))
-                        ))
+                            color: Colors.pink,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            onPressed: () {
+                              save();
+                            },
+                            textColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            child: const Text('ADD ITEM',
+                                style: TextStyle(fontSize: 16))))
                   ],
                 )
               ],
