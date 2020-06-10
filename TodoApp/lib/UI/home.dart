@@ -31,16 +31,16 @@ class TodoListState extends State {
               pinned: true,
               flexibleSpace: LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
-                // print('constraints=' + constraints.toString());
-                top = constraints.biggest.height;
-                return FlexibleSpaceBar(
-                    //centerTitle: true,
-                    title: _appBarText(top),
-                    background: Image.asset(
-                      "assets/images/land.jpg",
-                      fit: BoxFit.cover,
-                    ));
-              }),
+                    // print('constraints=' + constraints.toString());
+                    top = constraints.biggest.height;
+                    return FlexibleSpaceBar(
+                      //centerTitle: true,
+                        title: _appBarText(top),
+                        background: Image.asset(
+                          "assets/images/land.jpg",
+                          fit: BoxFit.cover,
+                        ));
+                  }),
             ),
           ];
         },
