@@ -31,10 +31,10 @@ class TodoListState extends State {
               pinned: true,
               flexibleSpace: LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
-                // print('constraints=' + constraints.toString());
+               
                 top = constraints.biggest.height;
                 return FlexibleSpaceBar(
-                    //centerTitle: true,
+                    
                     title: _appBarText(top),
                     background: Image.asset(
                       "assets/images/land.jpg",
@@ -80,7 +80,7 @@ class TodoListState extends State {
         ),
         AnimatedOpacity(
           duration: Duration(milliseconds: 450),
-          //opacity: top == 80.0 ? 1.0 : 0.0,
+        
           opacity: top < 100.0 ? 0.0 : 1.0,
           child: Visibility(
             visible: top < 100.0 ? false : true,
@@ -94,7 +94,7 @@ class TodoListState extends State {
     );
   }
 
-  //Listview
+  //Listview for the lists of todo
   ListView todoListItems() {
     return ListView.builder(
       itemCount: count,

@@ -37,7 +37,6 @@ class TodoDetailState extends State {
     TextStyle textStyle = Theme.of(context).textTheme.headline6;
     return Scaffold(
         appBar: AppBar(
-          //automaticallyImplyLeading: false,
           title: Text(todo.title),
           actions: <Widget>[
             PopupMenuButton<String>(
@@ -50,7 +49,11 @@ class TodoDetailState extends State {
                 return choices.map((String choice) {
                   return PopupMenuItem<String>(
                     value: choice,
-                    child: Text(choice,style: TextStyle(fontSize:15.0 ,backgroundColor: Colors.grey[200]),),
+                    child: Text(
+                      choice,
+                      style: TextStyle(
+                          fontSize: 15.0, backgroundColor: Colors.grey[200]),
+                    ),
                   );
                 }).toList();
               },
@@ -81,7 +84,6 @@ class TodoDetailState extends State {
                         style: textStyle,
                         onChanged: (value) => this.updateDescription(),
                         decoration: InputDecoration(
-                            //labelText: "Description",
                             labelStyle: textStyle,
                             hintText: "Description",
                             border: OutlineInputBorder(
@@ -124,6 +126,7 @@ class TodoDetailState extends State {
             )));
   }
 
+  
   void select(String value) async {
     int result;
     switch (value) {
@@ -151,6 +154,7 @@ class TodoDetailState extends State {
     }
   }
 
+  //saving a todo
   void save() {
     todo.date = new DateFormat.yMd().format(DateTime.now());
     if (todo.id != null) {
@@ -160,7 +164,7 @@ class TodoDetailState extends State {
     }
     Navigator.pop(context, true);
   }
-
+  //updating the priority of the todo
   void updaterank(String value) {
     switch (value) {
       case "High":
